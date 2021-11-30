@@ -11,7 +11,7 @@ class App extends React.Component {
   is set to text
   */
   state = {innercomp:<textarea rows="4" cols="50" id="textinput"/>,
-            mode: "text",
+          mode: "text",
           sentimentOutput:[],
           sentiment:true
         }
@@ -45,17 +45,19 @@ class App extends React.Component {
 
     fetch(url).then((response)=>{
         response.json().then((data)=>{
+        console.log(data)
         this.setState({sentimentOutput:data.label});
         let output = data.label;
         let color = "white"
         switch(output) {
-          case "positive": color = "black";break;
-          case "negative": color = "black";break;
-          default: color = "black";
+          case "positive": color = "green";break;
+          case "negative": color = "red";break;
+          default: color = "yellow";
         }
         output = <div style={{color:color,fontSize:20}}>{output}</div>
         this.setState({sentimentOutput:output});
-      })});
+      })
+    });
   }
 
   sendForEmotionAnalysis = () => {
